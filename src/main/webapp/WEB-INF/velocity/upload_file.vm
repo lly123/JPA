@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Upload File</title>
+</head>
+<body>
+<form id="form1" method="post" action="uploadEmployeeImage" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td width="25%" align="right">Employee NO:</td>
+            <td><input type="text" NAME="employeeNo" style="width:300px;"/></td>
+        </tr>
+        <tr>
+            <td width="25%" align="right">Upload File:</td>
+            <td><input type="file" NAME="file" style="width:300px;"/></td>
+        </tr>
+        <tr align="center" valign="middle">
+            <td height="60" colspan="2"><input type="submit" value="Upload"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

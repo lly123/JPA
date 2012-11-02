@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.freeroom"/>
+    <context:annotation-config/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations" value="classpath:db.properties"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${database.driverClassName}"/>
+        <property name="url" value="${database.url}"/>
+        <property name="username" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+    </bean>
+
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="myPersistence"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="${database.platform}"/>
+                <property name="showSql" value="${database.showSql}"/>
+                <property name="generateDdl" value="${database.generateDdl}"/>
+            </bean>
+        </property>
+        <!--<property name="jpaProperties">-->
+        <!--<props>-->
+        <!--<prop key="hibernate.cache.use_query_cache">false</prop>-->
+        <!--<prop key="hibernate.cache.use_second_level_cache">false</prop>-->
+        <!--<prop key="hibernate.cache.use_structured_entries">false</prop>-->
+        <!--<prop key="hibernate.search.worker.execution">sync</prop>-->
+        <!--<prop key="hibernate.search.default.directory_provider">-->
+        <!--org.hibernate.search.store.RAMDirectoryProvider-->
+        <!--</prop>-->
+        <!--</props>-->
+        <!--</property>-->
+    </bean>
+
+</beans>
+
